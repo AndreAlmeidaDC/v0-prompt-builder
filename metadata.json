@@ -1,0 +1,26 @@
+{
+  "name": "v0-prompt-builder",
+  "version": "2026.06.16",
+  "last_standardized_at": "2026.06.16 GMT-3",
+  "description": "Vibecode skill for generating high-quality React UI components and pages with v0 by Vercel. Focused on shadcn/ui, Tailwind, design systems and visual iteration.",
+  "license": "MIT",
+  "origin_url": "https://github.com/AndreAlmeidaDC/v0-prompt-builder",
+  "origin_git_url": "https://github.com/AndreAlmeidaDC/v0-prompt-builder.git",
+  "family": "vibecode-prompt-builder",
+  "platform": "v0 (Vercel)",
+  "update_policy": "version-check.md",
+  "declared_capabilities": {
+    "network_egress": {
+      "expected": false,
+      "reason": "Prompt-generation skill; performs no network calls."
+    },
+    "subprocess": {
+      "expected": false,
+      "reason": "No subprocess execution."
+    },
+    "dependency_install": {
+      "expected": false,
+      "reason": "No package installation."
+    }
+  }
+}
