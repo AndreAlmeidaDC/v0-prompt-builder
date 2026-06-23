@@ -109,6 +109,14 @@ Não. Ela gera as especificações e prompts; você usa no v0. Funciona em qualq
 Vale para gerar e iterar a UI, mas lembre que o output é código React para integrar num
 projeto. Sem um desenvolvedor para fazer a integração final, o componente fica só no v0.
 
+**Preciso ativar acessibilidade?**
+Não. Acessibilidade é opcional e fica desligada por padrão. Logo no início do fluxo a
+skill pergunta se o app terá interface web usada por terceiros ou se precisa atender a
+requisito de acessibilidade. Se for uso interno, protótipo ou app da própria equipe,
+responda que não e siga sem nenhum peso extra. Se responder que sim, a skill passa a
+tratar acessibilidade como requisito de toda a UI, com base em
+`references/accessibility-web.md`.
+
 ## Estrutura do repositório
 
 ```
@@ -118,6 +126,7 @@ references/
   platform-v0.md                  # Design system, Registry, estados, design mode
   archetypes.md                   # Guia de escolha de plataforma
   version-check.md                # Protocolo de auto-atualização
+  accessibility-web.md            # Acessibilidade web (opcional, ver gate na Fase 1)
 templates/
   PRD.md                          # Template de requisitos de produto
   DATA_MODEL.md                   # Template de modelo de dados
