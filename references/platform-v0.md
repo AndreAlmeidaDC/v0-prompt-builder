@@ -1,133 +1,136 @@
-# Platform Reference — v0 by Vercel
+# Platform Reference — v0
 
-v0 (v0.app, anteriormente v0.dev) é o gerador de UI da Vercel. Foco: componentes
-React, Next.js, Tailwind CSS e shadcn/ui de altíssima qualidade. É um **gerador de
-UI**, não um app builder completo. O output é código para integrar no seu projeto,
-não um app deployado.
+**Última verificação:** 2026-09-02, documentação oficial do v0.
 
-> **Atenção de arquétipo:** o v0 é fundamentalmente diferente do Lovable, bolt e a0.dev.
-> Use o Fluxo Alternativo de UI do CORE (não as Fases 1-6) ao trabalhar com o v0.
-> Esta referência detalha os passos desse fluxo.
+O v0 atual é um ambiente de desenvolvimento com agente, editor, preview, Vercel Sandbox, terminal, integração Git e suporte a aplicações full-stack. O modelo antigo de “gerador de UI sem backend” está obsoleto.
 
----
+Fontes oficiais principais:
 
-## O que o v0 faz (e o que não faz)
+- https://v0.dev/docs/full-stack-apps
+- https://api2.v0.dev/docs/sandbox
+- https://api2.v0.dev/docs/terminal-commands
+- https://api2.v0.dev/docs/github
+- https://api2.v0.dev/docs/databases
+- https://api2.v0.dev/docs/agentic-features
 
-**Faz:**
-- Gera componentes React com shadcn/ui e Tailwind de alta qualidade
-- Gera páginas e layouts completos para Next.js
-- Aceita screenshot/mockup como referência visual
-- Itera visualmente via "design mode" (sem gastar créditos de prompt)
-- Deploy 1-click para Vercel (você integra no seu projeto)
+## Modos recomendados
 
-**Não faz:**
-- Não gera backend nativo (você conecta sua própria API)
-- Não faz setup de banco de dados, auth ou deploy completo de app
-- Não tem branding workflow embutido — design system vai via Registry
-- Não assume responsividade — você pede explicitamente
+### 1. Existing repository
 
----
+Conecte o repositório e inspecione `package.json`, framework, rotas, estilos, testes, Git e ambientes antes de propor mudanças. O v0 cria branch por chat e registra mudanças em commits; use PR para revisão em vez de trabalhar diretamente na principal.
 
-## Passo v0-1 — Configurar o Design System
+### 2. Greenfield full-stack app
 
-Antes de gerar qualquer componente, defina a base visual. Sem isso, o v0 gera
-componentes bonitos mas fora da identidade da marca.
+O v0 tende a produzir resultados mais confiáveis com Next.js, incluindo server actions e API routes, mas não force migração em projeto existente. Comece pela menor vertical de valor. Adicione banco, auth ou integração somente quando o comportamento exigir.
 
-**Se você tem design system:**
-1. Aplique seus tokens (cores, radius, espaçamento, fontes) ao shadcn/ui theme
-   via `globals.css` e `tailwind.config.ts`
-2. Se quiser integração profunda, configure uma **shadcn/ui Registry** (veja docs:
-   v0.app/docs/design-systems). A registry permite que o v0 gere diretamente
-   respeitando seus componentes e tokens.
-3. Com a registry configurada, o botão "Open in v0" abre o chat com o contexto
-   do seu design system pré-carregado.
+### 3. UI and design system
 
-**Se não tem design system ainda:**
-Defina antes de gerar o primeiro componente:
-- Cor primária, secundária e neutras (hex)
-- Border radius padrão (nenhum / sm / md / lg / full)
-- Fonte para corpo e headings
-- Dark mode: sim / não / toggle
+Use para componentes, páginas, tokens, shadcn e composição visual. Declare estados, dados, responsividade, acessibilidade e o que deve ser preservado. Screenshot é referência, não autorização para copiar marca ou conteúdo.
 
----
+### 4. Repair and review
 
-## Passo v0-2 — Especificar o Componente
+Peça primeiro inspeção, reprodução do problema e plano. Não permita refatoração ampla dentro de correção pontual. Exija teste do sintoma original.
 
-Um componente de cada vez. Um prompt de v0 de qualidade contém:
+## Sandbox e terminal
 
-**Comportamento:** o que o componente faz (não só o nome)
-> "Um botão de submit que desabilita e mostra spinner durante o loading, e muda
-> para ícone de check quando a operação é bem-sucedida."
+Cada chat executa em Vercel Sandbox isolado com projeto, servidor, preview e terminal. O terminal pode inspecionar Git, executar testes e usar CLIs.
 
-**Estados explícitos:** liste os estados que o componente deve tratar
-> Estados: default, hover, disabled, loading (com spinner), success (com check), error (com mensagem inline)
+Modos de permissão:
 
-**Dados / props:** o que o componente recebe (se souber)
-> "Recebe: label (string), isLoading (boolean), onSuccess (callback)"
+- **Ask:** adequado para repositórios sensíveis, credenciais, banco real ou comandos remotos;
+- **Auto:** padrão para trabalho normal em sandbox com regras claras;
+- **Full:** somente em projeto descartável, sem credenciais, dados críticos ou produção; requer revisão posterior do histórico.
 
-**Componentes shadcn nomeados:** se souber quais quer usar
-> "Use shadcn Button como base, Badge para status, e Tooltip para o ícone de info"
+Full não é atalho para confiança. Defina previamente comandos permitidos, áreas graváveis e ações proibidas.
 
-**Intenção visual:** não só "bonito" — seja específico
-> "Visual clean, sem bordas grossas, ícones Lucide. Cores do design system."
+## Git workflow
 
-**Responsividade** (não é automática — declare se precisar):
-> "Em mobile: stacked vertically. Em desktop: side-by-side com gap de 24px."
+1. confirme branch e base;
+2. registre escopo e arquivos permitidos;
+3. implemente uma mudança;
+4. rode sensores;
+5. revise diff;
+6. abra PR;
+7. só faça merge ou deploy com aprovação.
 
-**Referência visual:** screenshot ou mockup colado no chat acelera muito.
+Nunca peça ao agente para resolver conflito apagando mudanças desconhecidas.
 
----
+## Full-stack e dados
 
-## Passo v0-3 — Iterar e Exportar
+O v0 pode criar rotas de backend e conectar bancos como Supabase, Neon, Upstash e outros serviços do marketplace. Isso não torna backend obrigatório.
 
-O loop do v0 é **visual**, diferente do loop de features do Lovable/Bolt:
+Antes de persistência, defina:
 
-1. Gere o componente
-2. Veja no preview interativo do v0
-3. Use o **design mode** para ajustes não-estruturais (texto, espaçamento, cores,
-   tipografia) — sem gastar créditos extras de prompt
-4. Para mudanças de comportamento, estados ou estrutura → novo prompt específico
-5. Quando satisfeito: copie o código e integre no seu projeto
+- entidade e ownership;
+- autenticação e autorização;
+- validação client/server/database;
+- isolamento entre usuários/tenants;
+- secrets server-side;
+- migração, backup e rollback;
+- ambiente de preview versus produção.
 
-**Não tente fazer tudo num prompt só.** Se o componente tem variantes complexas,
-gere a variante principal primeiro, depois adicione as outras iterativamente.
+Variável pública de cliente não é secret. Nunca exponha credencial privilegiada por prefixo público.
 
----
+## MCP e integrações
 
-## Reancoragem no v0
+Marketplace e MCP ampliam as ferramentas disponíveis ao agente. Para cada integração, registre:
 
-Se o componente gerado não respeitar o design system:
-1. Verifique se os tokens de tema estão aplicados (globals.css / tailwind.config.ts)
-2. No próximo prompt, especifique o componente shadcn alvo e os tokens relevantes
-3. Se tiver registry configurada, mencione explicitamente no prompt
+- ações de leitura e escrita;
+- dados acessados;
+- escopos OAuth;
+- confirmação humana;
+- ambiente;
+- logging e rollback.
 
----
+Não dê Full permission a um agente com ferramentas privilegiadas e credenciais reais.
 
-## Créditos e Modelos (2026)
+## Prompt de planejamento
 
-Três tiers de modelo disponíveis em todos os planos: Mini, Pro, Max.
-- Free: $5 em créditos/mês (consome rápido com Pro/Max)
-- Premium: $20/mês (projetos pequenos/médios)
-- Design mode e preview: sem créditos extras
-- Prompts concisos e estruturados gastam menos créditos
+```text
+Inspecione o projeto e produza um plano sem editar arquivos.
 
----
+Objetivo: [resultado]
+Escopo permitido: [áreas]
+Preservar: [comportamentos]
+Riscos: [dados, auth, integração, produção]
 
-## Quando o v0 NÃO é a ferramenta certa
+Entregue:
+1. fatos observados;
+2. hipótese do problema ou arquitetura;
+3. arquivos afetados;
+4. etapas pequenas;
+5. verificação por etapa;
+6. rollback;
+7. dúvidas que não podem ser respondidas pelo repositório.
+```
 
-- Você quer um app completo com backend → use Lovable ou bolt.new
-- Você quer app mobile nativo → use a0.dev
-- Você quer backend sem código manual → use Base44
-- Você não usa React/Next.js → o v0 é otimizado para este ecossistema;
-  adaptar para outros frameworks é possível mas adiciona trabalho
+## Prompt atômico
 
----
+```text
+Implemente somente [mudança única] na branch atual.
 
-## Limitações do v0
+Preserve: [itens]
+Arquivos permitidos: [lista ou área]
+Comportamento esperado: [contrato]
+Estados/edge cases: [lista]
+Critérios de aceite: [observáveis]
+Verificação: [comandos e fluxo]
 
-- Output é um "strong draft": acessibilidade profunda, data layer e testes são
-  responsabilidade do desenvolvedor.
-- Sem backend nativo — você integra a API.
-- Responsividade não é assumida — declare explicitamente.
-- Se não configurar design system/tokens, cada componente pode ter visual ligeiramente
-  diferente dos outros.
+Não faça refatoração fora do escopo, não altere produção e não faça merge ou deploy.
+Ao terminar, mostre diff resumido, comandos executados, resultados e pontos cegos.
+```
+
+## Verificação mínima
+
+- diff e escopo;
+- lint/typecheck/build conforme projeto;
+- testes relevantes;
+- browser para fluxo alterado;
+- console e rede;
+- acessibilidade quando houver UI;
+- segurança e autorização quando houver dados;
+- preview não conectado acidentalmente a produção.
+
+## Claims voláteis
+
+Modelos, integrações, limites e preços mudam. Não grave valores fixos no prompt. Verifique a documentação oficial na data do uso.

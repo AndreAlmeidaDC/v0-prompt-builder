@@ -1,55 +1,56 @@
 ---
 name: v0-prompt-builder
 description: >
-  Skill para gerar componentes React e páginas de UI de alta qualidade com v0 by Vercel. Foco em shadcn/ui, Tailwind, design systems e iteração visual. Use quando o usuário quiser gerar componentes ou UI para projeto Next.js/React existente.
+  Guides planning, building, repairing, testing and releasing full-stack apps, existing Git repositories, pages and design systems with the current v0 by Vercel. Use when the user mentions v0, v0.app, Vercel Sandbox, v0 Git workflows or asks for structured v0 prompts. Inspect existing projects before choosing a stack and require approval for production-impacting actions.
 license: MIT
 ---
 
-# v0 (Vercel) Prompt Builder
+# v0 Prompt Builder
+
+This skill reflects the current full-stack v0 product model, not the legacy UI-only generator.
 
 ## Origin version check
 
-At the start of a meaningful use, check whether this skill has a newer upstream version.
-The canonical source is:
+Canonical source:
 
 ```text
 https://github.com/AndreAlmeidaDC/v0-prompt-builder
 ```
 
-If a newer version exists, summarize what changed and ask the user whether to update
-before proceeding. Never self-update silently. For the detailed protocol, read
-`references/version-check.md`.
+At meaningful use, follow `references/version-check.md`. Never self-update silently.
 
-*Autor: André Almeida*
+## Load order
 
----
+1. Read `references/vibecode-core.md`.
+2. Read `references/platform-v0.md`.
+3. Use `references/archetypes.md` only when platform choice is genuinely open.
+4. Apply the smallest project mode that fits the request.
 
-## Quando usar esta skill
+## Non-negotiable boundaries
 
-Use esta skill quando o usuário mencionar v0, v0.dev, v0.app, ou quiser gerar componentes React/Next.js/shadcn sem construir um app completo do zero.
+- Existing repository state beats assumed stack.
+- Project knowledge and plan are separate from execution prompts.
+- Backend, database and auth are optional until required by behavior.
+- One implementation slice per prompt.
+- Use branch/PR workflow and fresh verification.
+- Ask/Auto/Full permissions are a risk decision, not a convenience toggle.
+- Do not merge, deploy, connect production data, spend money or perform public actions without explicit approval.
 
-Se não tiver certeza se esta é a plataforma certa, leia `references/archetypes.md`
-para um guia de escolha.
+## Output
 
----
+Provide one of:
 
-## Como esta skill funciona
+- project knowledge block;
+- planning prompt;
+- atomic implementation prompt;
+- diagnostic/reanchoring prompt;
+- verification prompt;
+- release checklist.
 
-Esta skill usa um processo compartilhado (vibecode CORE) + detalhes específicos
-do v0 (Vercel):
+Do not dump all of them when only one is needed.
 
-1. **Carregue `references/vibecode-core.md`** — processo completo de especificação
-   e execução (intake, modelagem, branding, validação, geração, reancoragem).
+## Change history
 
-2. **Carregue `references/platform-v0.md`** — vocabulário, perguntas adicionais,
-   formatos de artefato e especificidades do v0 (Vercel).
-
-3. Execute o fluxo do CORE usando os detalhes da plataforma onde aplicável.
-
----
-
-## Histórico de Alterações
-
-| Data | Versão | Alterações |
+| Date | Version | Change |
 |---|---|---|
-| 2026.06.16 | 2026.06.16 | Criação da skill no formato vibecode: CORE compartilhado + referência específica de plataforma. |
+| 2026-09-02 | 2026.09.02 | Rebuilt for current full-stack v0: Vercel Sandbox, terminal permissions, Git/PR, databases, integrations, proportional architecture and verified execution. |
