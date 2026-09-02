@@ -1,26 +1,20 @@
 {
   "name": "v0-prompt-builder",
-  "version": "2026.06.23",
-  "last_standardized_at": "2026.06.23 GMT-3",
-  "description": "Vibecode skill for generating high-quality React UI components and pages with v0 by Vercel. Focused on shadcn/ui, Tailwind, design systems and visual iteration.",
+  "version": "2026.09.02",
+  "last_standardized_at": "2026-09-02 GMT-3",
+  "description": "Workflow skill for current v0: full-stack apps, existing Git repositories, UI/design systems, Vercel Sandbox, terminal permissions, integrations, testing and release safety.",
   "license": "MIT",
   "origin_url": "https://github.com/AndreAlmeidaDC/v0-prompt-builder",
   "origin_git_url": "https://github.com/AndreAlmeidaDC/v0-prompt-builder.git",
   "family": "vibecode-prompt-builder",
-  "platform": "v0 (Vercel)",
-  "update_policy": "version-check.md",
+  "platform": "v0",
+  "maturity": "beta",
+  "platform_claims_verified_at": "2026-09-02",
+  "supported_project_modes": ["greenfield-app", "existing-project-repair", "component-ui", "experience-marketing-site"],
+  "confirmation_required_for": ["merge", "publish-or-deploy", "production-data", "credentialed-write", "financial-action", "external-communication"],
   "declared_capabilities": {
-    "network_egress": {
-      "expected": false,
-      "reason": "Prompt-generation skill; performs no network calls."
-    },
-    "subprocess": {
-      "expected": false,
-      "reason": "No subprocess execution."
-    },
-    "dependency_install": {
-      "expected": false,
-      "reason": "No package installation."
-    }
+    "network_egress": {"expected": true, "reason": "The host may inspect Git repositories and current official v0 documentation."},
+    "subprocess": {"expected": true, "reason": "The workflow may direct v0 to run scoped terminal commands in Vercel Sandbox."},
+    "dependency_install": {"expected": true, "reason": "Project dependencies may be installed in the sandbox after manifest and scope review."}
   }
 }
